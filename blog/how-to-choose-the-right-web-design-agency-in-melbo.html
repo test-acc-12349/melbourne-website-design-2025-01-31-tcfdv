@@ -10,7 +10,7 @@
 </head>
 <body class="font-sans antialiased text-gray-900 bg-white">
     <!-- Header -->
-    <!-- Global Header -->
+<!-- Global Header - add this right after your <body> tag -->
 <header class="fixed w-full bg-white/95 backdrop-blur-sm shadow-md z-50">
     <nav class="container mx-auto px-6 py-4">
         <div class="flex items-center justify-between">
@@ -28,7 +28,7 @@
             <a href="index.html" class="hidden md:inline-block bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
                 Get Started
             </a>
-            <button class="md:hidden text-gray-600 hover:text-blue-600 transition duration-300" aria-label="Toggle menu">
+            <button id="menuButton" class="md:hidden text-gray-600 hover:text-blue-600 transition duration-300" aria-label="Toggle menu">
                 <i class="fas fa-bars text-2xl"></i>
             </button>
         </div>
@@ -178,27 +178,30 @@
         </div>
     </footer>
     <!-- Add this script right before the closing </body> tag -->
-<!-- Add this script to the bottom of each page, right before the closing </body> tag -->
+<!-- Add this script right before the closing </body> tag -->
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const menuButton = document.querySelector('[aria-label="Toggle menu"]');
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the menu button and mobile menu
+    const menuButton = document.getElementById('menuButton');
     const mobileMenu = document.getElementById('mobile-menu');
-    const menuIcon = document.querySelector('.fa-bars');
-    
+    const menuIcon = menuButton.querySelector('.fas');
+
+    // Add click event listener to menu button
     menuButton.addEventListener('click', function() {
-      const isOpen = mobileMenu.classList.contains('max-h-96');
-      
-      if (isOpen) {
-        mobileMenu.classList.remove('max-h-96');
-        mobileMenu.classList.add('max-h-0');
-        menuIcon.classList.remove('fa-times');
-        menuIcon.classList.add('fa-bars');
-      } else {
-        mobileMenu.classList.remove('max-h-0');
-        mobileMenu.classList.add('max-h-96');
-        menuIcon.classList.remove('fa-bars');
-        menuIcon.classList.add('fa-times');
-      }
+        // Toggle mobile menu
+        if (mobileMenu.classList.contains('max-h-96')) {
+            // Close menu
+            mobileMenu.classList.remove('max-h-96');
+            mobileMenu.classList.add('max-h-0');
+            menuIcon.classList.remove('fa-times');
+            menuIcon.classList.add('fa-bars');
+        } else {
+            // Open menu
+            mobileMenu.classList.remove('max-h-0');
+            mobileMenu.classList.add('max-h-96');
+            menuIcon.classList.remove('fa-bars');
+            menuIcon.classList.add('fa-times');
+        }
     });
 
     // Highlight current page in navigation
@@ -206,12 +209,12 @@
     const links = document.querySelectorAll('header nav a');
     
     links.forEach(link => {
-      if (link.href === window.location.href) {
-        link.classList.add('text-blue-600');
-        link.classList.remove('text-gray-600');
-      }
+        if (link.href === window.location.href) {
+            link.classList.add('text-blue-600');
+            link.classList.remove('text-gray-600');
+        }
     });
-  });
+});
 </script>
 </body>
 </html>
